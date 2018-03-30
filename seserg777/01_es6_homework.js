@@ -1,18 +1,28 @@
 class User {
     constructor(username) {
-        this._name = username;
+        let _name = username;
+        this.setName = function(name) { 
+        	_name = name; 
+      	}
+      	this.getName = function() { 
+        	return _name; 
+      	}
     }
     greeting() {
-        if (this._name){
-        	return `Hello ${this._name} !`;
+    	let _name = this.getName();
+        if (_name){
+        	return `Hello ${_name} !`;
         }
     }
 }
 
 let knocking = new User('John Doe');
-console.log(knocking);
-console.log(knocking._name);
-console.log(knocking.greeting());
+console.log(knocking); //User { setName: [Function], getName: [Function] }
+console.log(knocking.greeting()); //Hello John Doe !
+console.log(knocking._name); //undefined
+console.log(knocking.setName('Fred')); //undefined
+console.log(knocking.getName()); //Fred
+console.log(knocking.greeting()); //Hello Fred !
 
 let _guest = new WeakMap();
 class newUser {
@@ -28,6 +38,6 @@ class newUser {
 }
 
 let public_user = new newUser('Richard Doe');
-console.log(public_user);
-console.log(public_user._guest);
-console.log(public_user.greeting());
+console.log(public_user); //newUser {}
+console.log(public_user._guest); //undefined
+console.log(public_user.greeting()); //Hello Richard Doe !
