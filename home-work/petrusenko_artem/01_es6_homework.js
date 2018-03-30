@@ -1,16 +1,23 @@
-const __privateMethod = Symbol('privateMethod');
+let TestClass = (function () {
 
-class AbstractClass
-{
-    getPrivateMethod() {
-        return this[__privateMethod]();
+    const __privateMethod = Symbol('privateMethod');
+
+    class AbstractClass
+    {
+        callPrivateMethod() {
+            return this[__privateMethod]();
+        }
+
+        [__privateMethod]() {
+            return 'Private method was called';
+        }
     }
 
-    [__privateMethod]() {
-        return 'Private method was called';
-    }
-}
+    return new AbstractClass();
+});
 
-let test = new AbstractClass();
+let test = new TestClass();
 
-console.log(test.getPrivateMethod());
+console.log(test.callPrivateMethod()); // Is working =)
+
+console.log(test[__privateMethod]()); // Is not working ReferenceError: __privateMethod is not defined
