@@ -1,7 +1,7 @@
 // Получение факториалов с помощью функции-генератора
 // https://ru.wikipedia.org/wiki/Факториал
 
-var	factorial =	function * (n) {
+const	factorial =	function * (n) {
 	if	( n < 1 )
 		return; 
 	let	current	=	1 ; 
