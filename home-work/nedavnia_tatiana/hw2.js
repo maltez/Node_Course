@@ -24,7 +24,7 @@ user.getRegistrationInfo();
 
 function* generateFibSequence(n) {
   let a, b;
-  for (let i = 1; i <=n; i++) {
+  for (let i = 1; i <= n; i += 1) {
     const c = i <= 2 ? 1 : a + b;
     a = b || 1;
     b = c || 1;
