@@ -8,16 +8,11 @@ function generateSecondName(secondName) {
 }
 
 function firstSequentialFunction(val) {
-    let res = [];
-    res.push(val + 'A')
-    return res;
+    return val + 'A';
 }
 
 function secondSequentialFunction(val) {
-
-    val.push(val[0] + 'B');
-
-    return val;
+    return val + 'B';
 }
 
 function concat(result) {
@@ -36,10 +31,10 @@ Promise.all(
     (result) => firstSequentialFunction(result) // [ 'Artem PetrusenkoA']
 )
 .then(
-    (result) => secondSequentialFunction(result) // [ 'Artem PetrusenkoA', 'Artem PetrusenkoAB' ]
+    (result) => secondSequentialFunction(result) // Artem PetrusenkoAB
 )
 .then(
-    (result) => console.log(result) // [ 'Artem PetrusenkoA', 'Artem PetrusenkoAB' ]
+    (result) => console.log(result) // Artem PetrusenkoAB
 ).catch(
     (error) => console.error(error)
 );
