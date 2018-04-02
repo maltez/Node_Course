@@ -56,4 +56,5 @@ sayHelloWithDelay('Hello', 0.5)
     ])
     .then((data) => {
         console.log(data);
-    })
+    });
+    
