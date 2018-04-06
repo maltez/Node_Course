@@ -12,7 +12,8 @@ const User = ((firstName, secondName, age) => {
             if (prop === 'fullName') {
                 return target.firstName + ' ' + target.secondName;
             }
-            return target[prop];
+            
+            return Reflect.get(target, prop);
         },
         set(target, prop, value) {
             if (prop == 'firstName') {
@@ -33,8 +34,7 @@ const User = ((firstName, secondName, age) => {
                 }
             }
 
-            target[prop] = value;
-            return true;
+            return Reflect.set(target, prop, value);
         },
     })
 })
