@@ -1,3 +1,5 @@
+// Not right - generator has to retorn factorials. Not function. Please rework
+
 function* baseGenerator(number) {
   for (let i = 1; i<= number; i += 1) {
     yield i;

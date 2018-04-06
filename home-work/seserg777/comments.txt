@@ -1,0 +1,1 @@
+Please rename folder ${name}_${secondName}

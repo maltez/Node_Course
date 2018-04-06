@@ -14,10 +14,10 @@ class	ChildClass extends BaseClass {
 	}
 }
 
-let	base	= new	BaseClass();
+let	base	= new	BaseClass(); // Use const. This is reference type.
 console.log( base[ privateMethod ]() );	// Private method is working...
 
-let	child	= new	ChildClass();
+let	child	= new	ChildClass(); // Use const
 console.log( child.callPrivateMethod() );// Private method is working...
 console.log( child[ privateMethod ]() );// Private method is working...
 					// :((

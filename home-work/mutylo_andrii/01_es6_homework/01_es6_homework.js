@@ -11,7 +11,7 @@ class Person {
   }
 }
 
-let jack = new Person('Jack')
+let jack = new Person('Jack') // Use cnst instead
 
 console.log(jack._name); //undefined
 console.log(jack.getName()); // Jack
@@ -39,7 +39,7 @@ let Person = (function () {
   return Person;
 })();
 
-let john = new Person('John');
+let john = new Person('John'); // Use const. This is reference type
 john.greet(); //Name: John
 john.getAge(); //Age: 20
 console.log(`Age: ${john.ageId}`); //Age: undefined

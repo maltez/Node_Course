@@ -1,4 +1,4 @@
-let TestClass = (function () {
+let TestClass = (function () {// Use const insead
 
     const __privateMethod = Symbol('privateMethod');
 

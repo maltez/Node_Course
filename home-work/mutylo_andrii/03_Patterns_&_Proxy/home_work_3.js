@@ -43,7 +43,7 @@ const User = (function(name, secondName, age){
             return target[prop];
           }  
       },
-      set(target, prop, value) {
+      set(target, prop, value) {// Refactor this case and if make your method is too complex
           switch (prop) {
             case 'age':
               if (!Number.isInteger(value) || value < 0 || value > 100) {

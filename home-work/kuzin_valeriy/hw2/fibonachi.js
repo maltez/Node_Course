@@ -3,7 +3,7 @@ function* generatorFibonachi(number) {
       second = 0;
 
   for (let i = 1; i <= number ; i += 1) {
-    therd = first + second;
+    therd = first + second;// Missing variable declaration and the 'third'
     first = second;
     second = therd;
     yield i === 1 ? 1 : second ;
@@ -11,6 +11,7 @@ function* generatorFibonachi(number) {
 
 }
 
+// Rafactor this method. Too much ifs
 function rangeFibodathi(number) {
   if (number < 0) {
     return [];
@@ -18,7 +19,7 @@ function rangeFibodathi(number) {
     return [0];
   } else {
     let range = [...generatorFibonachi(number)];
-    range.unshift(0);
+    range.unshift(0);// Do not use unsift use push. 
     return range;
   }
 }

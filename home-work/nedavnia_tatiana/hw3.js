@@ -94,6 +94,7 @@ const User = (function () {
         // const user = Reflect.construct(...arguments);
         // user.fullName = `${name} ${lastname}`;
         // return user;
+        //NML: Refletion this is very bad way for instance validation
       }
       return new Error('invalid arguments value');
     }

@@ -25,7 +25,7 @@ function* fact (n) {
         res = res * i;
     }
 }
-const factorial = fact(6);
+const factorial = fact(6);// Loops?
 console.log(factorial.next());
 console.log(factorial.next());
 console.log(factorial.next());

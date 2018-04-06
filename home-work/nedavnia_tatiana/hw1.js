@@ -20,3 +20,5 @@ const user = new User('Clint Eastwood');
 user.getRegistrationInfo();
 
 // I have some privacy conserns over Object.getOwnPropertySymbols
+// You right - this reason why I reccomend use weak map instead symbols
+// console.log(Object.getOwnPropertySymbols(user)); - shows your property

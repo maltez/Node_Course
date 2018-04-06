@@ -1,5 +1,5 @@
 /---------------------------------------------------------------------/
-
+// Use more undertandable variable names.
 const generatorFibonachi = function*(n) {
     let a = 0,
         b = 1;

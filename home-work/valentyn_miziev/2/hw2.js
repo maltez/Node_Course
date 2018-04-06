@@ -42,8 +42,8 @@ const ThisIsRock = (function() {
   return ThisIsRock;
 }());
 
-let firstSong = new ThisIsRock('Stairway To Heaven');
-let secondSong = new ThisIsRock('Smoke on the Water');
+let firstSong = new ThisIsRock('Stairway To Heaven');// Use const
+let secondSong = new ThisIsRock('Smoke on the Water');// Use const
 firstSong.getSong();
 secondSong.getSong();
 console.log(firstSong.songName); // Stairway To Heaven

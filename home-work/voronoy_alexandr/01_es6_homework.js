@@ -27,7 +27,7 @@ idea2.getIdea(); // not good idea
 //=============Symbol==================\\
 
 
-let AnotherHuman = (function () {
+let AnotherHuman = (function () {// Use const
     const _name = Symbol('name');
 
     class AnotherHuman {

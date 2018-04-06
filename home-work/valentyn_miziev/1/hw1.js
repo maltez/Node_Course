@@ -1,4 +1,4 @@
-let Monitor = (function () {
+let Monitor = (function () {// Use const
   let resolution = Symbol();
 
   class Monitor {
@@ -14,8 +14,8 @@ let Monitor = (function () {
   return Monitor;
 })();
 
-let samsung = new Monitor('Samsung');
-let dell = new Monitor('Dell');
+let samsung = new Monitor('Samsung');// Use const
+let dell = new Monitor('Dell');// Use const
 samsung.print();
 dell.print();
 

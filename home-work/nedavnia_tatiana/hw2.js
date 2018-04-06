@@ -74,3 +74,4 @@ Promise.all([ getPromisePlaceholder('hello', 1000), getPromisePlaceholder('kitty
   .then(([ value, length ]) => ({ value, length }))
   .catch(err => console.error(err.message));
 
+// Cool!

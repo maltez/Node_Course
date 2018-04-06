@@ -88,5 +88,5 @@ Promise.all([
     return multiply(updatedData[0], updatedData[1])
       .then(() => devision(updatedData[0], updatedData[1]));
   })
-  .then(promiseThenCallback)
-  .catch(promiseCatchCallback);
+  .then(promiseThenCallback) // Do not use such styly in promise use (data)=> {}. Do not use callbacks
+  .catch(promiseCatchCallback);// The same above

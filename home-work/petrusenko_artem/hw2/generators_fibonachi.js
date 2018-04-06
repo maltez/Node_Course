@@ -10,7 +10,7 @@ function* generate(n){
 }
 
 let generator = generate(10);
-console.log(generator.next());
+console.log(generator.next()); // Maybe loop better?
 console.log(generator.next());
 console.log(generator.next());
 console.log(generator.next());

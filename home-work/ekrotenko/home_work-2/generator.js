@@ -16,7 +16,7 @@ const genFactorial = function* (count) {
     let res = 1;
     for (let i = 0; i <= count;) {
         yield res;
-        res*=++i;
+        res*=++i; // NML ?? Please rework. It is hard for understand.
     }
 };
 
