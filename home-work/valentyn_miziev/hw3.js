@@ -45,8 +45,8 @@ const validator = {
     if (typeof firstName !== 'string' ) throw new TypeError('firstName must be a string');
     if (typeof secondName !== 'string') throw new TypeError('secondName must be a string');
 
-    if (firstName.length < 3 || firstName.length > 50) throw RangeError('firstName length must be from 3 letters to 50');
-    if (secondName.length < 3 || secondName.length > 50) throw RangeError('secondName length must be from 3 letters to 50');
+    if (firstName.length < 3 || firstName.length > 50) throw new RangeError('firstName length must be from 3 letters to 50');
+    if (secondName.length < 3 || secondName.length > 50) throw new RangeError('secondName length must be from 3 letters to 50');
 
     if (!Number.isInteger(age) || age < 0 || age > 100) throw new Error('Age must be an integer and in range from 0 to 100');
 
