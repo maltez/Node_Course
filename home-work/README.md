@@ -10,3 +10,7 @@ Create promise chain. First should run in parallel two functions. Their results 
 # Homework 3
 Create singletone based on generator. Generator returns random n niumbers. Numbers must be integers. 
 Create proxy object that will be validate User class input. Age - is integer, in range 0 - 100. Name is the string. Min length 3 max length 50. Proxy should add full name field that would be concatination of First nad last name. 
+
+# Homework 4
+Create class car. And create logger that will be log all movings, coordinates and fuel level of this car
+Create you own event emitter. It should predefine listeners for 3 events. Listen, start and stop. Shold have ability extend max listeners count via setter and remove listener by name.
