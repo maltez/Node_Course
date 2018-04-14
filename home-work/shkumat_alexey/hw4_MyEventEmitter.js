@@ -31,10 +31,7 @@ class	MyEventEmitter extends EventEmitter {
 	set	maxListeners( value ) {
 		super.setMaxListeners( value );
 	}
-	removeListener( eventName, eventHandler ) {
-		if ( typeof eventHandler == 'function' ) {
-			super.removeListener( eventHandler ) 
-		}
+	removeListener( eventName, eventHandler ) {		
 		if ( typeof eventHandler == 'string' ) {
 			eventHandler = eventHandler.trim();
 			super.listeners( eventName ).forEach( item => {
@@ -42,6 +39,8 @@ class	MyEventEmitter extends EventEmitter {
 					super.removeListener( eventName, item );					
 				} 
 			});
+		} else	if ( typeof eventHandler == 'function' ) {
+			super.removeListener( eventHandler );
 		}
 	}
 }
