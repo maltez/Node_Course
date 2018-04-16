@@ -1,5 +1,3 @@
-// Реализация приватных членов класса с помощью WeakMap
-
 class	BlackBox  {
 	constructor() {
 		this.weakMap	= new	WeakMap();

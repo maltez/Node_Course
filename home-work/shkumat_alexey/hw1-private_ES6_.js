@@ -1,5 +1,3 @@
-// Квази-приватные(созданные с помощью символа) члены, к сожалению, доступны всем через [ ]
-
 const	privateMethod	=	Symbol('privateMethod');
 
 class	BaseClass {

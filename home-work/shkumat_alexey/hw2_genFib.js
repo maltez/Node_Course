@@ -1,6 +1,3 @@
-// Получение чисел Фибоначчи с помощью функции-генератора
-// https://ru.wikipedia.org/wiki/Числа_Фибоначчи
-
 const	fib	=	function * (n) {
 	if	( n < 1 )
 		return; 

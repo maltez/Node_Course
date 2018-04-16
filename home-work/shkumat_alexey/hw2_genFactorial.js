@@ -1,6 +1,3 @@
-// Получение факториалов с помощью функции-генератора
-// https://ru.wikipedia.org/wiki/Факториал
-
 const	factorial =	function * (n) {
 	if	( n < 1 )
 		return; 
