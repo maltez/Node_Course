@@ -14,3 +14,9 @@ Create proxy object that will be validate User class input. Age - is integer, in
 # Homework 4
 Create class car. And create logger that will be log all movings, coordinates and fuel level of this car
 Create you own event emitter. It should predefine listeners for 3 events. Listen, start and stop. Shold have ability extend max listeners count via setter and remove listener by name.
+
+# Homework 5
+Create your own webpack with following abilities:
+    - Minify js, css, html files
+    - Create single bundle from js(each file is module) and css file.
+    - Create deploing package from folder(bundle and minify css, js then create gzip archive and in the bottom each html file copiright sign 'Jocasino.com');
