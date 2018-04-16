@@ -20,3 +20,4 @@ Create your own webpack with following abilities:
     - Minify js, css, html files
     - Create single bundle from js(each file is module) and css file.
     - Create deploing package from folder(bundle and minify css, js then create gzip archive and in the bottom each html file copiright sign 'Jocasino.com');
+    - Read all settings with file mask from config.
