@@ -1,4 +1,4 @@
-// Create class car. And create logger that will log all movings, coordinates and fuel level of this car
+// Create class car. And create logger that will log all movings, coordinates and fuel level of this car.
 
 class	Car {
 	constructor() {
