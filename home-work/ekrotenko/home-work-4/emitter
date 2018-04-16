@@ -1,0 +1,30 @@
+// Create own event emitter extending base one. It should predefine listeners for 3 events. Listen, start, stop.
+// Should have ability extend max listeners count via setter and remove listener by name.
+
+const {EventEmitter} = require('events');
+
+class CustomEmitter extends EventEmitter {
+    constructor() {
+        super();
+        this.on('start', function start() {
+            console.log('START listener');
+        });
+        this.on('stop', function stop() {
+            console.log('STOP listener');
+        });
+        this.on('listen', function listen() {
+            console.log('STOP listener');
+        });
+    }
+
+    set maxListeners(value) {
+        this.setMaxListeners(value);
+    }
+
+    deleteListener(name, listener) {
+        const listenersToRemove = this.listeners(name).filter(l=>l.name===listener);
+        if(listenersToRemove){
+            this.removeListener(name, listenersToRemove[0]);
+        }
+    }
+}
