@@ -53,3 +53,59 @@ const test = new ObservableCar('BMW', 8);
 test.addListener(logger);
 test.run('backward', 10, 17, 100); // Logged car with name BMW | Run direction backward | From 10 17 | Distance 100 | Rate 10 | FuelLevel 10
 test.run('forward', 20, 34, 200); // Logged car with name BMW | Run direction forward | From 20 34 | Distance 200 | Rate 10 | FuelLevel 20
+
+
+const { EventEmitter } = require('events');
+
+const event = new EventEmitter();
+
+class MyEventEmitter extends EventEmitter {
+  constructor(name) {
+    super();
+    this.name = name;
+    this.on(name, () => {
+      
+    });
+  }
+
+  get maxListenersCount () {
+    return this.getMaxListeners(this.name);
+  }
+
+  set maxListenersCount (count) {
+    this.setMaxListeners(count);
+  }
+
+  remove(name){
+    this.removeListener(this.name, name);
+  }
+}
+
+const myEvent = new MyEventEmitter('test');
+
+const listen = () => {
+  console.log(`listen`);
+};
+
+const start = () => {
+  console.log(`start`);
+};
+
+const stop = () => {
+  console.log(`stop`);
+};
+
+console.log(myEvent.maxListenersCount); // 10
+myEvent.maxListenersCount = 5;
+console.log(myEvent.maxListenersCount); // 5
+
+myEvent.on('test', listen);
+myEvent.on('test', start);
+myEvent.on('test', stop);
+
+myEvent.remove(listen);
+
+myEvent.emit('test');
+
+// start
+// stop
