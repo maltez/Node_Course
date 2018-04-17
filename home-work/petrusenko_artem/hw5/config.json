@@ -1,0 +1,5 @@
+{
+    "output_dir": "minified",
+    "output_css": "minified.css",
+    "output_js": "minified.js"
+}
