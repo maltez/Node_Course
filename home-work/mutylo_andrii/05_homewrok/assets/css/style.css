@@ -1,0 +1,219 @@
+/* CSS Document */
+
+/*-----------------------------------------------------------------*/
+/*--- Font Face Including ---*/
+/*-----------------------------------------------------------------*/
+/*------------------------------------------------------*/
+/*--- Font Family :: [Poppins] :: Light ---*/
+/*------------------------------------------------------*/
+@font-face {
+    font-family: 'PoppinsLight';
+    src: url('../fonts/poppins-light.eot');
+    src: url('../fonts/poppins-light.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/poppins-light.woff2') format('woff2'),
+         url('../fonts/poppins-light.woff') format('woff'),
+         url('../fonts/poppins-light.ttf') format('truetype'),
+         url('../fonts/poppins-light.svg#PoppinsLight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+/*------------------------------------------------------*/
+/*--- Font Family :: [Poppins] :: Regular ---*/
+/*------------------------------------------------------*/
+@font-face {
+    font-family: 'PoppinsRegular';
+    src: url('../fonts/poppins-regular.eot');
+    src: url('../fonts/poppins-regular.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/poppins-regular.woff2') format('woff2'),
+         url('../fonts/poppins-regular.woff') format('woff'),
+         url('../fonts/poppins-regular.ttf') format('truetype'),
+         url('../fonts/poppins-regular.svg#PoppinsRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+/*------------------------------------------------------*/
+/*--- Font Family :: [Poppins] :: Medium ---*/
+/*------------------------------------------------------*/
+@font-face {
+    font-family: 'PoppinsMedium';
+    src: url('../fonts/poppins-medium.eot');
+    src: url('../fonts/poppins-medium.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/poppins-medium.woff2') format('woff2'),
+         url('../fonts/poppins-medium.woff') format('woff'),
+         url('../fonts/poppins-medium.ttf') format('truetype'),
+         url('../fonts/poppins-medium.svg#PoppinsMedium') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+/*------------------------------------------------------*/
+/*--- Font Family :: [Poppins] :: Semibold ---*/
+/*------------------------------------------------------*/
+@font-face {
+    font-family: 'PoppinsSemibold';
+    src: url('../fonts/poppins-semibold.eot');
+    src: url('../fonts/poppins-semibold.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/poppins-semibold.woff2') format('woff2'),
+         url('../fonts/poppins-semibold.woff') format('woff'),
+         url('../fonts/poppins-semibold.ttf') format('truetype'),
+         url('../fonts/poppins-semibold.svg#PoppinsSemibold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+/*------------------------------------------------------*/
+/*--- Font Family :: Material Icons ---*/
+/*------------------------------------------------------*/
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/iconfont/MaterialIcons-Regular.eot');
+    src: local('Material Icons'),
+         local('MaterialIcons-Regular'),
+         url('../fonts/iconfont/MaterialIcons-Regular.woff2') format('woff2'),
+         url('../fonts/iconfont/MaterialIcons-Regular.woff') format('woff'),
+         url('../fonts/iconfont/MaterialIcons-Regular.ttf') format('truetype');
+}
+/*-----------------------------------------------------------------*/
+/*--- Custom Reset Styles ---*/
+/*-----------------------------------------------------------------*/
+body, html { margin: 0; padding: 0; outline: none; min-width: 320px; } 
+body { color: #4a4a4a; font: 14px/24px 'PoppinsRegular', Helvetica, Arial, sans-serif; }
+p, img { margin: 0; padding: 0; }
+h1, h2, h3, h4 ,h5, h6 { font-weight: normal; padding: 0; margin: 0; }
+button, a, .slick-slide { outline: none; -webkit-outline: none; -moz-outline: none; }
+a img { border: 0; display: block; outline: none; -webkit-outline: none; -moz-outline: none; }
+a, a:focus { color: #2cb2b8; text-decoration: none; }
+a:hover, a:focus { text-decoration: none; outline: none !important; }
+a:hover { color: #0085ad; }
+* { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+button, input[type="submit"] { border: 0; box-shadow: none; line-height: normal;  outline: none; text-shadow: none; border-radius: 0; }
+input[type="text"], input[type="email"], input[type="password"], input[type="number"], textarea, select { font: 14px/24px 'PoppinsMedium', Helvetica, Arial, sans-serif; border-radius: 0; outline: none !important; -webkit-appearance: none; box-shadow: none; border: none; color: #fff; }
+input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus, input[type="number"]:focus, textarea:focus, select:focus { box-shadow: none; } 
+input::-webkit-input-placeholder { opacity: 1; color: #0586ad; }
+input:-ms-input-placeholder { opacity: 1; color: #0586ad; }
+input:-moz-placeholder { opacity: 1; color: #0586ad; }
+input::-moz-placeholder { opacity: 1; color: #0586ad; }
+textarea::-webkit-input-placeholder { opacity: 1; color: #0586ad; }
+textarea:-ms-input-placeholder { opacity: 1; color: #0586ad; }
+textarea:-moz-placeholder { opacity: 1; color: #0586ad; }
+textarea::-moz-placeholder { opacity: 1; color: #0586ad; }
+/*-----------------------------------------------------------------*/
+/*--- Custom Lists Styles ---*/
+/*-----------------------------------------------------------------*/
+#header .menu, .list { list-style: none; padding: 0; margin: 0; }
+/*-----------------------------------------------------------------*/
+/*--- Custom Fonts ---*/
+/*-----------------------------------------------------------------*/
+.material-icons { font-family: 'Material Icons'; font-weight: normal; font-style: normal; font-size: 24px; display: inline-block; line-height: 1; text-transform: none; letter-spacing: normal; word-wrap: normal; white-space: nowrap; direction: ltr; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; -moz-osx-font-smoothing: grayscale; font-feature-settings: 'liga'; }
+.wysiwyg h1, .wysiwyg h2, .wysiwyg h3, .wysiwyg h4, .wysiwyg h5, .wysiwyg h6, .right-sidebar .sidebar-subtitle, .documents-list .document-note span, .products-slider .control-arrows, .products-slider .title, .right-sidebar a, .right-sidebar .sidebar-title, .right-sidebar .sidebar-control .control-btn { font-family: 'PoppinsMedium'; font-weight: normal; font-style: normal; }
+.right-sidebar .products-list li:before, #header .menu a { font-family: 'PoppinsSemibold'; font-weight: normal; font-style: normal; }
+.documents-list a, .right-sidebar { font-family: 'PoppinsLight'; font-weight: normal; font-style: normal; }
+/*-----------------------------------------------------------------*/
+/*--- Canvas Styles ---*/
+/*-----------------------------------------------------------------*/
+body { background: #43abce; }
+/*-----------------------------------------------------------------*/
+/*--- Wysiwyg Styles ---*/
+/*-----------------------------------------------------------------*/
+.wysiwyg { overflow-x: hidden; }
+.wysiwyg h1, .wysiwyg h2, .wysiwyg h3, .wysiwyg h4, .wysiwyg h5, .wysiwyg h6 { color: #0085ad; padding: 5px 0 19px; }
+.wysiwyg h1 { font-size: 1.857em; line-height: 31px; }
+.wysiwyg h2 { font-size: 1.714em; line-height: 29px; }
+.wysiwyg h3 { font-size: 1.571em; line-height: 27px; }
+.wysiwyg h4 { font-size: 1.429em; line-height: 25px; }
+.wysiwyg h5 { font-size: 1.286em; line-height: 23px; }
+.wysiwyg h6 { font-size: 1.143em; line-height: 21px; }
+.wysiwyg a { color: #000; }
+.wysiwyg a:hover { opacity: 0.6; }
+
+.wysiwyg img { max-width: 100%; height: auto; }
+.wysiwyg img.size-full { margin: 31px 0 28px 0; }
+.wysiwyg .alignnone { margin: 31px 36px 28px 0; max-width: 100%; height: auto; }
+.wysiwyg .alignleft { float: left; margin: 31px 36px 28px 0; max-width: 100%; height: auto; }
+.wysiwyg .alignright { float: right; margin: 31px 0 28px 36px; max-width: 100%; height: auto;}
+.wysiwyg .aligncenter { clear: both; display: block; margin: 30px auto; max-width: 100%; height: auto; }
+.wysiwyg p { padding: 12px 0; }
+
+.wysiwyg table { margin: 20px 0; }
+.wysiwyg th { background: #e0e0e0; color: #000; }
+.wysiwyg tr:nth-child(even) td { background: #e0e0e0; }
+.wysiwyg td , .wysiwyg th { min-width: 50px; padding: 15px; text-align: left; }
+
+.wysiwyg blockquote { border-left: 1px solid #eee; padding: 0 20px; margin: 12px 0; }
+
+.wysiwyg ul li { position: relative; }
+.wysiwyg ul li:before { font-family: 'FontAwesome'; content: '\f111'; position: relative; top: -3px; left: -14px; font-size: 7px; color: #000; margin: 0 -6px 0 0px; }
+
+.wysiwyg ul, .wysiwyg ol { padding: 12px 0 12px 40px; margin: 0; }
+/*-----------------------------------------------------------------*/
+/*--- Main Map Styles ---*/
+/*-----------------------------------------------------------------*/
+#canvas { width: 100%; position: absolute; bottom: 0; left: 0; z-index: 100;} 
+/*-----------------------------------------------------------------*/
+/*--- List Styles ---*/
+/*-----------------------------------------------------------------*/
+.right-sidebar .list { padding: 0 0 24px; }
+.right-sidebar .list li { border-bottom: 1px solid #fff; padding: 13px 0; }
+.right-sidebar .list li:first-child { border-top: 1px solid #fff; }
+/*-----------------------------------------------------------------*/
+/*--- Documents List Styles ---*/
+/*-----------------------------------------------------------------*/
+.right-sidebar .documents-list .list li { position: relative; padding: 0; }
+.documents-list { position: relative; }
+.documents-list a { display: block; padding: 13px 0 13px 60px; }
+.documents-list .sidebar-title { padding-right: 180px; }
+.documents-list .icons-group { position: absolute; left: 0; top: 16px; }
+.documents-list .icons-group i { font-size: 16px; padding: 0 4px 0 0; }
+.documents-list .document-note { font-size: 1.143em; position: absolute; right: 0; top: 7px; }
+.documents-list .document-note span { display: inline-block; vertical-align: middle; }
+.documents-list .document-note i { font-size: 16px; vertical-align: middle; padding: 0 0 0 10px; }
+/*-----------------------------------------------------------------*/
+/*--- List Checkbox Style ---*/
+/*-----------------------------------------------------------------*/
+.list-checkbox.list li { position: relative; padding: 0; }
+.list-checkbox li input { position: absolute; opacity: 0; left: 0 }
+.list-checkbox label { padding: 13px 0 13px 60px; display: block; cursor: pointer; }
+.list-checkbox label::before, .list-checkbox label::after { font-family: "Material Icons"; position: absolute; left: 0; top: 13px; font-size: 28px; }
+.list-checkbox label::before { content: 'check_box'; opacity: 0; }
+.list-checkbox label::after { content: 'check_box_outline_blank'; }
+.list-checkbox li input:checked + label::before { opacity: 1; }
+.list-checkbox li input:checked + label::after { opacity: 0; }
+/*-----------------------------------------------------------------*/
+/*--- Form Style ---*/
+/*-----------------------------------------------------------------*/
+.form .input-container { padding: 15px 0; }
+.form .input-inner { position: relative; }
+.form .successful input { background-image: url(../images/icons/check-circle.svg); }
+.form .error input { background-image: url(../images/icons/error-outline.svg); }
+.form input { width: 100%; height: 50px; border-radius: 2px; background: rgba(255,255,255,0.2) no-repeat; background-position: 95% 50%; padding: 0 50px 0 20px; }
+/*-----------------------------------------------------------------*/
+/*--- Instruction Styles ---*/
+/*-----------------------------------------------------------------*/
+.right-sidebar.instruction .sidebar-inner { display: block; }
+/*-----------------------------------------------------------------*/
+/*--- Slider Styles ---*/
+/*-----------------------------------------------------------------*/
+.slider img { display: block; width: 100%; height: auto; }
+.control-arrows .arrows { display: inline-block; vertical-align: middle; height: 20px; }
+.control-arrows .arrows a { display: inline-block; line-height: 17px; }
+.control-arrows .arrows a i { line-height: 17px; }
+/*-----------------------------------------------------------------*/
+/*--- Sidebar Slider Styles ---*/
+/*-----------------------------------------------------------------*/
+.products-slider { position: relative; padding: 0 0 25px; } 
+.products-slider .sidebar-title { padding-right: 160px; }
+.products-slider .slider  { margin: 0 -6px; }
+.products-slider .slick-slide { padding: 0 6px; }
+.products-slider .title { line-height: 17px; padding: 10px 0; }
+.products-slider .control-arrows { position: absolute; right: 0; top: 0; padding: 10px 0 0; }
+/*-----------------------------------------------------------------*/
+/*--- Sidebar Footer ---*/
+/*-----------------------------------------------------------------*/
+.sidebar-footer { overflow: hidden; padding: 10px 0; }
+.sidebar-footer .back-btn { float: left; }
+.sidebar-footer .send-btn { float: right; }
+.sidebar-footer .back-btn span, .sidebar-footer .send-btn span { font-size: 1.143em; display: inline-block; vertical-align: top; padding: 1px 0 0 14px; text-transform: uppercase; }
+
+
+  
+  

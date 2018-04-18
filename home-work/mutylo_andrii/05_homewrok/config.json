@@ -1,0 +1,8 @@
+{
+  "output": {
+    "css": "min_css",
+    "js": "min_js",
+    "html": "min_html"
+  },
+  "input": "assets"
+}
