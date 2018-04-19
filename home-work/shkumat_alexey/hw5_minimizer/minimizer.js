@@ -114,7 +114,7 @@ const	processFile	=	function( fileName ) {
 		target	=	target + str;
 	});
 	if ( ext == '.js'  ) {
-		target	= replace( replace( replace( target, '};,' , '},' ) , '};}','}}') , ';)' , ')' )  ;
+		target	= replace( replace( replace( replace( target, '};,' , '},' ) , '};}','}}') , ';)' , ')' ) , ';,' , ',' ) ;
 		if	( ( target.indexOf('*/') > target.indexOf('/*') ) ) {
 			target = target.replace(/\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*\//g, '');
 		}
