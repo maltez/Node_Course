@@ -1,0 +1,1 @@
+function first(){console.log('first');}function first(){console.log('first');}function second(){console.log('second');}function second(){console.log('second');}
