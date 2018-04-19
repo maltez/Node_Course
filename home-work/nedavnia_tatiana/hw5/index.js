@@ -1,10 +1,10 @@
-const {createReadStream, createWriteStream, readdir, unlink} = require('fs');
-const {extname, format, join} = require('path');
-const {Transform} = require('stream');
-const {createGzip} = require('zlib');
+const { createReadStream, createWriteStream, readdir, unlink } = require('fs');
+const { extname, format, join } = require('path');
+const { Transform } = require('stream');
+const { createGzip } = require('zlib');
 
-const {src, dest, destName} = require('./config.json');
-const {ensureDestDir, deleteFile, getFilesWithinFolder, clearComments} = require('./helpers');
+const { src, dest, destName } = require('./config.json');
+const { ensureDestDir, deleteFile, getFilesWithinFolder, clearComments } = require('./helpers');
 
 const minify = {
   '.html': file => new Promise((resolve, reject) => {

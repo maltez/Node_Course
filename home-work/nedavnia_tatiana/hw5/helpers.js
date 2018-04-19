@@ -1,5 +1,5 @@
-const {readdir, mkdir, unlink} = require('fs');
-const {join} = require('path');
+const { readdir, mkdir, unlink } = require('fs');
+const { join } = require('path');
 
 const ensureDestDir = (dir, cb = function(){}) => {
   return new Promise((res, rej) => {
@@ -50,4 +50,4 @@ const clearComments = {
   '.css': text => text.replace(/\/\*.*?\*\//g, '')
 };
 
-module.exports = {ensureDestDir, deleteFile, getFilesWithinFolder, clearComments};
+module.exports = { ensureDestDir, deleteFile, getFilesWithinFolder, clearComments };
