@@ -1,4 +1,4 @@
-//  Create your own webpack with following abilities: - Minify js, css, html files
+//  Create your own webpack with following abilities:  Minify js, css, html files
  
 const	fs		=	require('fs');
 const	path		=	require('path');
@@ -98,39 +98,32 @@ const	processFile	=	function( fileName ) {
 	console.log( '\tProcess source file ', sourceFileName , ' ...' ) ;
 	const	ext		=	getFileExt( sourceFileName ).toLowerCase();
 	const	targetFileName	=	sourceFileName.substr( 0 , sourceFileName.lastIndexOf( '.' ) ) + '.min' + getFileExt( sourceFileName );
-	const	targetFile	=	fs.createWriteStream(targetFileName);
 	let	target		=	'';
 
 	getFileContent( sourceFileName, 'utf8' ).split('\n').forEach( ( line ) => {
 		let	str = line.replace('\r','').trim();
 		if ( ext == '.js' || ext == '.css' ) {
-			str = minimize( str );
+			str =  minimize( str ) ;
 			if	( str.length ) {
 				const	ch	= str[ str.length - 1 ];
-				if	( ch == '}' || ch.match( '\w' ) ) {
+				if	( ch == '}' || ( ch.match( /\w/ ) ) ) {
 					str += ';';
 				}
 			}
 		}
-		target	+=	str;
+		target	=	target + str;
 	});
-	switch	( ext ) {
-		case '.js': {
+	if ( ext == '.js'  ) {
+		target	= replace( replace( replace( target, '};,' , '},' ) , '};}','}}') , ';)' , ')' )  ;
+		if	( ( target.indexOf('*/') > target.indexOf('/*') ) ) {
 			target = target.replace(/\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*\//g, '');
-			target = target.replace('};}','}}');	
-			break; 
 		}
-		case '.css': {
-			target = target.replace(/\/\*.*?\*\//g, '');	
-			break; 
-		}
-		case '.html': {
-			target = target.replace(/<!--.+?-->/g, '');	
-			break; 
-		}
-	}
-	targetFile.write( target );
-	targetFile.end();
+	} else if ( ext == '.css' ) {
+		target = target.replace(/\/\*.*?\*\//g, '');	
+	} else if ( ext == '.html' ) {
+		target = target.replace(/<!--.+?-->/g, '');	
+	}	
+	fs.writeFileSync( targetFileName , target , 'utf8' );	
 	console.log( '\t\tTarget file ' , targetFileName , ' is done.') ;
 }
 
