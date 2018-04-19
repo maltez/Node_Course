@@ -2,8 +2,7 @@
  
 const	fs		=	require('fs');
 const	path		=	require('path');
-const	quit		=	process.exit;
-const	fileExists	=	fs.existsSync ;
+const	fileExists	=	fs.existsSync;
 const	getDirName	=	path.dirname;
 const	getFileExt	=	path.extname;
 const	getFileName	= 	path.basename;
@@ -21,7 +20,6 @@ const	replace =  function( str , fromStr , toStr ) {
 	while   ( result.indexOf( fromStr ) > -1 ) {
 		result = result.replace( fromStr , toStr );
 	}
-
 	return  result;
 }
 
@@ -32,13 +30,11 @@ const	removeExtraSpaces = function( str ) {
 	let	result	=	str.trim();
 	while	( result.match( /\W\s/ ) ) {
 		result = result.replace( /\W\s/ , (match, offset, origin) => {
-			// console.log('replace : ' , match,  '-' , offset, '-' ,string);
 			return origin[offset];
 		});
 	}
 	while	( result.match( /\s\W/ ) ) {
 		result = result.replace( /\s\W/ , (match, offset, origin) => {
-			// console.log('replace : ' , match,  '-' , offset, '-' ,string);
 			return origin[offset + 1];
 		});
 	}
@@ -58,11 +54,12 @@ const	minimize = function( str ) {
 		return	'';
 	}
 	let	result	= str.trim();
+
 	if	( !result.length ) {
 		return	'';
 	}
-	//console.log( 'debug : ', result );
 	const	cPos = result.indexOf( '//' ) ;
+
 	if	( cPos == 0 ) {
 		return	'';
 	}
@@ -99,12 +96,14 @@ const	processFile	=	function( fileName ) {
 		return;
 	}
 	console.log( '\tProcess source file ', sourceFileName , ' ...' ) ;
-	const	needSpecialMinimising = ( getFileExt( sourceFileName ).toLowerCase() == '.js' ) ||  ( getFileExt( sourceFileName ).toLowerCase() == '.css' ) ;
+	const	ext		=	getFileExt( sourceFileName ).toLowerCase();
 	const	targetFileName	=	sourceFileName.substr( 0 , sourceFileName.lastIndexOf( '.' ) ) + '.min' + getFileExt( sourceFileName );
 	const	targetFile	=	fs.createWriteStream(targetFileName);
+	let	target		=	'';
+
 	getFileContent( sourceFileName, 'utf8' ).split('\n').forEach( ( line ) => {
 		let	str = line.replace('\r','').trim();
-		if ( needSpecialMinimising ) {
+		if ( ext == '.js' || ext == '.css' ) {
 			str = minimize( str );
 			if	( str.length ) {
 				const	ch	= str[ str.length - 1 ];
@@ -113,20 +112,35 @@ const	processFile	=	function( fileName ) {
 				}
 			}
 		}
-		targetFile.write( str );
+		target	+=	str;
 	});
+	switch	( ext ) {
+		case '.js': {
+			target = target.replace(/\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*\//g, '');
+			target = target.replace('};}','}}');	
+			break; 
+		}
+		case '.css': {
+			target = target.replace(/\/\*.*?\*\//g, '');	
+			break; 
+		}
+		case '.html': {
+			target = target.replace(/<!--.+?-->/g, '');	
+			break; 
+		}
+	}
+	targetFile.write( target );
 	targetFile.end();
 	console.log( '\t\tTarget file ' , targetFileName , ' is done.') ;
 }
 
 if	( !fileExists( configFileName ) ) {
 	console.log( 'Error : config file ' , configFileName + ' not found!' );
-	quit();
+} else {
+	console.log( 'Use config file ' , configFileName );
+	getFileContent( configFileName, 'utf8' ).split('\n').forEach( ( fileName ) => {
+		if ( fileName.trim() !='' ) {
+			processFile( fileName.trim() );
+		}
+	});
 }
-
-console.log( 'Use config file ' , configFileName );
-getFileContent( configFileName, 'utf8' ).split('\n').forEach( ( fileName ) => {
-	if ( fileName.trim() !='' ) {
-		processFile( fileName.trim() );
-	}
-});
