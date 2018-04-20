@@ -1,0 +1,6 @@
+{
+  "minify": [ "css", "js" ],
+  "copiright": "Jocasino.com",
+  "bundleFilder": "./dist",
+  "archiveName": "superProject"
+}
