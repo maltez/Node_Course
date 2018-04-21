@@ -128,7 +128,7 @@ const archive = file => new Promise((resolve, reject) => {
 });
 
 async function sequalizeStreams(files) {
-  for (let i = 0; i < files.length; i++) {
+  for (let i = 0; i < files.length; i += 1) {
     const path = join(src, files[i]);
     await minify[extname(files[i])](path);
   }
@@ -141,7 +141,7 @@ async function sequalizeStreams(files) {
 }
 
 async function sequalizeArchive(files) {
-  for (let i = 0; i < files.length; i++) {
+  for (let i = 0; i < files.length; i += 1) {
     await archive(files[i]);
   }
 }
@@ -163,5 +163,5 @@ promisify(readdir)(dest)
   })
   .catch(err => {
     console.error(err);
-    process.exit();
+    process.exit(1);
   });
