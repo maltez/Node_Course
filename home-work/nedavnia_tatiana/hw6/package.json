@@ -1,0 +1,12 @@
+{
+  "name": "study-linter",
+  "version": "1.0.0",
+  "description": "study project removes f-bombs and ensures dot at the end of each line",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "tatiana_nedavnia",
+  "license": "ISC"
+}
