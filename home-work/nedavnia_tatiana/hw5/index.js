@@ -1,10 +1,16 @@
-const { createReadStream, createWriteStream, readdir, unlink } = require('fs');
+const { createReadStream, createWriteStream, readdir, unlink, mkdir } = require('fs');
 const { extname, format, join } = require('path');
+const { promisify } = require('util');
 const { Transform } = require('stream');
 const { createGzip } = require('zlib');
 
 const { src, dest, destName } = require('./config.json');
-const { ensureDestDir, deleteFile, getFilesWithinFolder, clearComments } = require('./helpers');
+
+const clearComments = {
+  '.html': text => text.replace(/<!--.+?-->/g, ''),
+  '.js': text => text.replace(/\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*$/gm, ''),
+  '.css': text => text.replace(/\/\*.*?\*\//g, '')
+};
 
 const minify = {
   '.html': file => new Promise((resolve, reject) => {
@@ -12,7 +18,6 @@ const minify = {
     const name = format({ext, dir: dest, name: `${destName || 'bundle'}.min`});
 
     const transform = new Transform({
-
       transform(chunk, enc, cb) {
         const text = clearComments[ext](chunk.toString());
         this.push(text.replace(/\s{2,}/g, ''));
@@ -23,7 +28,6 @@ const minify = {
         this.push('\r\n &copy; JoyCasino.com');
         cb();
       }
-
     });
 
     createReadStream(file)
@@ -124,26 +128,33 @@ const archive = file => new Promise((resolve, reject) => {
 });
 
 async function sequalizeStreams(files) {
-  for (let i = 0; i < files.length; i++) {
+  for (let i = 0; i < files.length; i += 1) {
     const path = join(src, files[i]);
     await minify[extname(files[i])](path);
   }
 
-  getFilesWithinFolder(dest)
+  promisify(readdir)(dest)
+    .then(files => files.map(file => join(dest, file)))
     .then(files => {
       sequalizeArchive(files);
     });
 }
 
 async function sequalizeArchive(files) {
-  for (let i = 0; i < files.length; i++) {
+  for (let i = 0; i < files.length; i += 1) {
     await archive(files[i]);
   }
 }
 
-ensureDestDir(dest)
-  .then(getFilesWithinFolder)
-  .then(files => Promise.all([files.map(file => deleteFile(file))]))
+promisify(readdir)(dest)
+  .catch(err => {
+    if(err.code === 'ENOENT') {
+      return promisify(mkdir)(join(__dirname, dest));
+    } else throw err;
+  })
+  .then(dir => promisify(readdir)(dest))
+  .then(files => files.map(file => join(dest, file)))
+  .then(files => Promise.all([files.map(file => promisify(unlink)(file))]))
   .then(() => {
     readdir(src, function (err, files) {
       if (err) throw err;
@@ -152,10 +163,5 @@ ensureDestDir(dest)
   })
   .catch(err => {
     console.error(err);
-    process.exit();
+    process.exit(1);
   });
-
-
-
-
-
