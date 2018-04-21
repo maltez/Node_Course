@@ -15,16 +15,17 @@ for (let params in config) {
   });
 
   readdir(localDir, (err, files) => {
+    // ToDo create counter files only current type
+    let allFiles = files.length;
+    let numberFiles = 0;
     files.forEach(file => {
       if (file.endsWith(`.${params}`)) {
+        numberFiles += 1;
         let readStream = createReadStream(`${localDir}/${file}`);
-        readStream.pipe(shrinkData).pipe(writeStream, {end: false});
+
+        readStream.pipe(shrinkData).pipe(writeStream, {end: numberFiles === allFiles});
         //console.log(file);
       }
-    });
-  })
+    }); 
+  });
 }
-
-
-
-
