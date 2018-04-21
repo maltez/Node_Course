@@ -21,3 +21,7 @@ Create your own webpack with following abilities:
     - Create single bundle from js(each file is module) and css file.
     - Create deploing package from folder(bundle and minify css, js then create gzip archive and in the bottom each html file copiright sign 'Jocasino.com');
     - Read all settings with file mask from config.
+# Homework 6
+Create your own linter.
+- if in the end of line you will miss '.' it has to generate error.
+If in the text present word f**ck it has to generate warning. 
