@@ -48,7 +48,7 @@ for(let file of files) {
     });
 
     readStream.on('end',(chunk) => {
-      tranStream.write(`\r\nJoyCasino.com`);
+      // tranStream.write(`\r\nJoyCasino.com`);
     });
 
     jsStream.on('finish', () => {
@@ -66,7 +66,7 @@ for(let file of files) {
   });
 
   readStream.on('end',(chunk) => {
-    tranStream.write(`\r\nJoyCasino.com`);
+    // tranStream.write(`\r\nJoyCasino.com`);
   });
 
   jsStream.on('finish', () => {
@@ -94,12 +94,3 @@ for(let file of files) {
   readStream.pipe(tranStream).pipe(jsStream, {end: false});
  }
 }
-
-// const	removeSpace = function( str ) {
-// 	if	( typeof str !== 'string') {
-// 		return	'';
-// 	}
-// 	str	= str.trim();
-
-//  return str;
-// }
