@@ -25,41 +25,81 @@ const files = getFiles(path.join(__dirname, config.input));
 console.log('files', files)
 const tranStream = new Transform({
   transform(chunk, encoding, cb) {
-    this.push(chunk);
+    this.push(chunk.toString().replace(/\n|\t|\v| |\r\n|\r/g, ''));
     return cb();
   }
 });
 
+const getWritePath = function (type, file) {
+ let writeFile =config.output[type] + '/' + path.parse(file).name + '.min.' + type;
+  return getPath(writeFile);
+}
+
 let jsStream, cssStream, htmlStream;
 
 for(let file of files) {
+  console.log('file', file)
   if (file.endsWith('.js')) {
-    let writeFile = path.parse(file).name + '.min.js';
-    jsStream = createWriteStream(getPath(writeFile));
-
+    let writePath = getWritePath('js', file)
+    jsStream = createWriteStream(writePath);
     readStream = createReadStream(file);
     readStream.on('data',(chunk) => {
-      console.log(chunk.length);
+      console.log('chunk',chunk);
     });
 
     readStream.on('end',(chunk) => {
-      console.log('TEST')
       tranStream.write(`\r\nJoyCasino.com`);
     });
+
+    jsStream.on('finish', () => {
+      jsStream.end();
+    });
+
     readStream.pipe(tranStream).pipe(jsStream, {end: false});
   }
-//  else if (file.endsWith('.css')) {
-//    readStream = createReadStream(file);
-//    readStream.pipe(tranStream).pipe(cssStream, {end: false});
-//  }
-//  else if (file.endsWith('.html')) {
-//    readStream = createReadStream(file);
-//    readStream.pipe(tranStream).pipe(htmlStream, {end: false});
-//  }
+ else if (file.endsWith('.css')) {
+  let writePath = getWritePath('css', file)
+  jsStream = createWriteStream(writePath);
+  readStream = createReadStream(file);
+  readStream.on('data',(chunk) => {
+    console.log('chunk',chunk);
+  });
+
+  readStream.on('end',(chunk) => {
+    tranStream.write(`\r\nJoyCasino.com`);
+  });
+
+  jsStream.on('finish', () => {
+    jsStream.end();
+  });
+
+  readStream.pipe(tranStream).pipe(jsStream, {end: false});
+ }
+ else if (file.endsWith('.html')) {
+  let writePath = getWritePath('html', file)
+  jsStream = createWriteStream(writePath);
+  readStream = createReadStream(file);
+  readStream.on('data',(chunk) => {
+    console.log('chunk',chunk);
+  });
+
+  readStream.on('end',(chunk) => {
+    tranStream.write(`\r\nJoyCasino.com`);
+  });
+
+  jsStream.on('finish', () => {
+    jsStream.end();
+  });
+
+  readStream.pipe(tranStream).pipe(jsStream, {end: false});
+ }
 }
 
+// const	removeSpace = function( str ) {
+// 	if	( typeof str !== 'string') {
+// 		return	'';
+// 	}
+// 	str	= str.trim();
 
-//
-//readStream.on('error', (err) => {
-//  console.log(`Error: ${err.message}`);
-//});
+//  return str;
+// }
