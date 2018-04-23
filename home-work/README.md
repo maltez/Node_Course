@@ -25,3 +25,10 @@ Create your own webpack with following abilities:
 Create your own linter.
 - if in the end of line you will miss '.' it has to generate error.
 If in the text present word f**ck it has to generate warning. 
+
+# Homework 7
+Create socket chat that using the room. 
+Client 1 can push the message to client 2 and vice versa.
+Client 3 can push the message to client 4 and vice versa.
+All clients have all message history.
+Put room message history in file before closing the chat.
