@@ -1,8 +1,10 @@
-const { appendFile } = require('fs');
+const { appendFile, appendFileSync } = require('fs');
 const { createServer } = require('net');
+const { EventEmitter } = require('events');
 
-class Room {
+class Room extends EventEmitter {
   constructor(connection) {
+    super();
     this.opened = true;
     this.participants = [];
     this.history = [];
@@ -32,12 +34,13 @@ class Room {
         this.errorHandler(err);
       } else {
         participants.splice(participants.indexOf(connection), 1);
+        if (!participants.length) this.emit('empty', this);
       }
     });
   }
 
   static errorHandler(err) {
-    appendFile('./debug.txt', `\r\n${err}`, () => process.exit(1));
+    appendFileSync('./debug.txt', `\r\n${err}`, () => process.exit(1));
   }
 }
 
@@ -49,7 +52,9 @@ class Chat {
   add(connection) {
     const lastRoom = this.roomList[this.roomList.length - 1];
     if (!this.roomList.length || !lastRoom.opened) {
-      this.roomList.push(new Room(connection));
+      const newRoom = new Room(connection);
+      newRoom.on('empty', room => this.roomList.splice(this.roomList.indexOf(room), 1));
+      this.roomList.push(newRoom);
       return;
     }
     lastRoom.add(connection);
@@ -61,6 +66,10 @@ const chat = new Chat();
 const server = createServer()
   .on('connection', socket => chat.add(socket))
   .on('error', (err) => {
-    appendFile('./debug.txt', `\r\n${err}`, () => process.exit(1));
+    appendFileSync('./debug.txt', `\r\n${err}`, () => process.exit(1));
   });
 server.listen(3000);
+
+process.on('uncaughtException', () => {
+  process.exit(1);
+});
