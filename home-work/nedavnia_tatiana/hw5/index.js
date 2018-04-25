@@ -12,138 +12,107 @@ const clearComments = {
   '.css': text => text.replace(/\/\*.*?\*\//g, '')
 };
 
-const minify = {
-  '.html': file => new Promise((resolve, reject) => {
-    const ext = extname(file);
-    const name = format({ext, dir: dest, name: `${destName || 'bundle'}.min`});
-
-    const transform = new Transform({
-      transform(chunk, enc, cb) {
-        const text = clearComments[ext](chunk.toString());
-        this.push(text.replace(/\s{2,}/g, ''));
-        cb()
-      },
-
-      flush(cb) {
-        this.push('\r\n &copy; JoyCasino.com');
-        cb();
-      }
-    });
-
-    createReadStream(file)
-      .pipe(transform)
-      .pipe(createWriteStream(`./${name}`))
-      .on('finish', () => {
-        resolve(true);
-      })
-      .on('error', (error) => {
-        reject(error);
-      });
-  }),
-
-  '.js': file => new Promise((resolve, reject) => {
-    const ext = extname(file);
-    const name = format({ext, dir: dest, name: `${destName || 'bundle'}.min`});
-
-    let first = true;
-    const transform = new Transform({
-      transform(chunk, enc, cb) {
-        let text;
-        if (first) {
-          text = `(function(){${clearComments[ext](chunk.toString())}`;
-          first = false;
-        } else {
-          text = clearComments[ext](chunk.toString());
-        }
-        this.push(text.replace(/\s{2,}/g, ''));
-        cb()
-      },
-
-      flush(cb) {
-        this.push('}());');
-        cb();
-      }
-    });
-
-    createReadStream(file)
-      .pipe(transform)
-      .pipe(createWriteStream(`./${name}`, {flags: 'a'}))
-      .on('finish', () => {
-        resolve(true);
-      })
-      .on('error', (error) => {
-        reject(error);
-      });
-  }),
-
-  '.css': (file) => new Promise((resolve, reject) => {
-    const ext = extname(file);
-    const name = format({ext, dir: dest, name: `${destName || 'bundle'}.min`});
-
-    const transform = new Transform({
-      transform(chunk, enc, cb) {
-        let text = clearComments[ext](chunk.toString());
-        this.push(text.replace(/\s{2,}/g, ''));
-        cb()
-      }
-    });
-
-    createReadStream(file)
-      .pipe(transform)
-      .pipe(createWriteStream(`./${name}`, {flags: 'a'}))
-      .on('finish', () => resolve(true))
-      .on('error', (error) => reject(error));
-  }),
-};
-
-const archive = file => new Promise((resolve, reject) => {
-  let first = true;
-  const transform = new Transform({
-    transform(chunk, enc, cb) {
-      let text;
-      if (first) {
-        text = `\n----filename ${file} start----\n${chunk.toString()}`;
-      } else {
-        text = chunk.toString();
-      }
-      this.push(text);
-      cb();
-    },
-
-    flush(cb) {
-      this.push(`\n----filename ${file} end----\n`)
-      cb()
-    }
-  });
-
-  createReadStream(file)
-    .on('end', () => unlink(file, (err) => {
-      if (err) throw err;
-    }))
-    .pipe(transform)
-    .pipe(createGzip())
-    .pipe(createWriteStream(join(dest, './archive.gz'), {flags: 'a'}))
-    .on('finish', () => resolve(true))
-    .on('error', (error) => reject(error));
-});
-
-async function sequalizeStreams(files) {
+async function minify(files) {
   for (let i = 0; i < files.length; i += 1) {
-    const path = join(src, files[i]);
-    await minify[extname(files[i])](path);
-  }
+    const file = join(src, files[i]);
+    await new Promise((resolve, reject) => {
+      const ext = extname(file);
+      const name = format({ext, dir: dest, name: `${destName || 'bundle'}.min`});
+      let transform;
+      let first;
 
-  promisify(readdir)(dest)
-    .then(files => files.map(file => join(dest, file)))
-    .then(files => {
-      sequalizeArchive(files);
+      switch (ext) {
+        case '.html':
+          transform = new Transform({
+            transform(chunk, enc, cb) {
+              const text = clearComments[ext](chunk.toString());
+              this.push(text.replace(/\s{2,}/g, ''));
+              cb()
+            },
+
+            flush(cb) {
+              this.push('\r\n &copy; JoyCasino.com');
+              cb();
+            }
+          });
+          break;
+        case ".css":
+          transform = new Transform({
+            transform(chunk, enc, cb) {
+              let text = clearComments[ext](chunk.toString());
+              this.push(text.replace(/\s{2,}/g, ''));
+              cb()
+            }
+          });
+          break;
+        case '.js':
+          let first = true;
+          transform = new Transform({
+            transform(chunk, enc, cb) {
+              let text;
+              if (first) {
+                text = `(function(){${clearComments[ext](chunk.toString())}`;
+                first = false;
+              } else {
+                text = clearComments[ext](chunk.toString());
+              }
+              this.push(text.replace(/\s{2,}/g, ''));
+              cb()
+            },
+
+            flush(cb) {
+              this.push('}());');
+              cb();
+            }
+          });
+          break;
+      }
+
+      createReadStream(file)
+        .pipe(transform)
+        .pipe(ext === '.html' ? createWriteStream(`./${name}`): createWriteStream(`./${name}`, {flags: 'a'}))
+        .on('finish', () => resolve(true))
+        .on('error', (error) => reject(error));
     });
+  }
+  return 'done';
 }
 
-async function sequalizeArchive(files) {
+async function archive(files) {
   for (let i = 0; i < files.length; i += 1) {
-    await archive(files[i]);
+    const file = files[i];
+    await new Promise((resolve, reject) => {
+      let first = true;
+      const transform = new Transform({
+        transform(chunk, enc, cb) {
+          let text;
+          if (first) {
+            text = `\n----filename ${file} start----\n${chunk.toString()}`;
+          } else {
+            text = chunk.toString();
+          }
+          this.push(text);
+          cb();
+        },
+
+        flush(cb) {
+          this.push(`\n----filename ${file} end----\n`)
+          cb()
+        }
+      });
+
+      createReadStream(file)
+        .on('end', () => unlink(file, (err) => {
+          if (err) reject(err);
+        }))
+        .pipe(transform)
+        .pipe(createGzip())
+        .pipe(createWriteStream(join(dest, './archive.gz'), {flags: 'a'}))
+        .on('finish', () => resolve(true))
+        .on('error', error => reject(error));
+    });
   }
+  return 'done'
 }
 
 promisify(readdir)(dest)
@@ -155,12 +124,11 @@ promisify(readdir)(dest)
   .then(dir => promisify(readdir)(dest))
   .then(files => files.map(file => join(dest, file)))
   .then(files => Promise.all([files.map(file => promisify(unlink)(file))]))
-  .then(() => {
-    readdir(src, function (err, files) {
-      if (err) throw err;
-      sequalizeStreams(files);
-    });
-  })
+  .then(() => promisify(readdir)(src))
+  .then(files => minify(files))
+  .then(() => promisify(readdir)(dest))
+  .then(files => files.map(file => join(dest, file)))
+  .then(files => archive(files))
   .catch(err => {
     console.error(err);
     process.exit(1);
