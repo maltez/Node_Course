@@ -1,3 +1,3 @@
 const path = require('path');
 
-console.log(path.join(__dirname, 'app.js'));
+(path.join(__dirname, 'app.js'));
