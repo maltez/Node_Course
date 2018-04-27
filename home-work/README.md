@@ -32,3 +32,9 @@ Client 1 can push the message to client 2 and vice versa.
 Client 3 can push the message to client 4 and vice versa.
 All clients have all message history.
 Put room message history in file before closing the chat.
+
+# Homework 8
+Based on http server create your own 'express' with:
+    - Routing
+    - Body parser (body after parcew add to request object as field)
+    - Send json
