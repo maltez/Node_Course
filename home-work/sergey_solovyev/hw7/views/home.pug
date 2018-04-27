@@ -1,0 +1,44 @@
+html
+    head
+        title Schat
+        script(src='https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js')
+        script(src='/socket.io/socket.io.js')
+        script.
+            const socket = io();
+           
+            console.log(socket);
+            socket.on('newcollab',function(item){
+                let historyFiels = document.getElementById('history');
+                historyFiels.innerHTML = historyFiels.innerHTML + '<br/>' + '<i>' + item + '</i>';
+            });
+            socket.on('added',function(added){
+                let historyFiels = document.getElementById('history');
+                historyFiels.innerHTML = historyFiels.innerHTML + '<br/>' + '<i>' + added + '</i>';
+            });
+            function addItem(index) {
+                socket.emit('room', index);
+                document.getElementById('history').innerHTML = '';
+            }
+            function send(){
+                let text = document.getElementById('chat-message').value;
+                socket.emit('add',text);
+                document.getElementById('chat-message').value = '';
+            }
+    body
+        h1 Simple Chat-room
+        bloquote choose your room
+        ul 
+            li 
+                button(onclick='addItem(1)') Room #1
+            li 
+                button(onclick='addItem(2)') Room #2
+            li 
+                button(onclick='addItem(3)') Room #3
+            li 
+                button(onclick='addItem(4)') Room #4
+        .controls
+            .history
+                div#history
+            .form-group
+                textarea#chat-message.form-control(name='content', rows='3', placeholder='Введите сообщение',  data-id=(_user != null) ? _user._id.toString(): null)
+                button.btn.btn-default(onclick='send()') Отправить

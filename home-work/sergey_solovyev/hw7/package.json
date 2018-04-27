@@ -1,0 +1,23 @@
+{
+  "name": "schat",
+  "version": "1.0.0",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seserg777/schat"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-session": "^2.0.0-beta.3",
+    "express": "^4.16.3",
+    "node": "^10.0.0",
+    "pug": "^2.0.3",
+    "socket.io": "^2.1.0"
+  }
+}
