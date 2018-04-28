@@ -38,7 +38,9 @@ class	MiniExpress {
 			}
 		}
 		if ( handler ) {
-			handler( req, res )
+			res.send = res.write;
+			handler( req, res );
+			res.end();
 		} else {
 			res.end( 'Access denied!' );	
 		} 

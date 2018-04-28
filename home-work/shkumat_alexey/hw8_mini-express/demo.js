@@ -6,10 +6,10 @@ const	port = 3000 ;
 
 app.use( bodyParser.text( { type: 'text/html' } ) );
 app.get( "/hello/", ( req, res ) => {
-	res.end( 'Hello,World!' );
+	res.send( 'Hello,World!');
 });
 app.get( "/",  ( req, res ) => {
-	res.end( 'Access denied!' );
+	res.send( 'Access denied!' );
 });
 app.listen( port , () => { 
 	console.log(`Server started on port ${port}...`); 
