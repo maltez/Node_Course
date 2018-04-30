@@ -28,7 +28,7 @@ router.get('/index', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  res.end(req.body, 'utf8');
+  res.end(JSON.stringify(req.body));
 });
 
 app.use(router.handle);
