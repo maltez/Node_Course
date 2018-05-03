@@ -1,6 +1,6 @@
 const { spawn } = require('child_process');
 
-const find = spawn('find', ['.', '-type', 'f'])
+const find = spawn('ls', ['.', '-type', 'f'])
 const wc = spawn('wc', ['-l']);
 
 find.stdout.pipe(wc.stdin);

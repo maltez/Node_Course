@@ -7,12 +7,11 @@ child.stdout.on('data', (data) => {
 });
 
 child.stderr.on('data', (data) => {
-    console.error(`child stdout:\n${data}`);
+    console.error(`child error:\n${data}`);
 });
 
 child.on('exit', (code, signal) => {
     console.log(`Child process exited with code ${code}, signal ${signal}`);
-
 });
 
 // Other events on child: disconnect, error, message, close

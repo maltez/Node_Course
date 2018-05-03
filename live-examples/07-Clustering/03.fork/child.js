@@ -4,6 +4,9 @@ process.on('message', (msg) => {
 
 let counter = 0;
 
-setInterval(() => {
+const interval = setInterval(() => {
     process.send({counter: counter++});
+    if (counter > 10) {
+        clearInterval(interval);
+    }
 }, 500);
