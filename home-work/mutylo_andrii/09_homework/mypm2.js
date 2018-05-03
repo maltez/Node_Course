@@ -26,8 +26,11 @@ if(cluster.isMaster) {
 
     cluster.on('fork', worker => {
       console.log(`Worker of app: ${app.name} started with id ${worker.process.pid}`);
-      if (!workerStorage[`${app.name}`]) {
+      const pid = worker.process.pid;
+      console.log('Storage = ', workerStorage);
+      if (!workerStorage[app.name]) {
         // Save initial restart attempts with new worker;
+        console.log(`Save worker with ${worker.process.pid} to workerStorage`)
         workerStorage[`${app.name}`] = {};
         workerStorage[`${app.name}`][worker.process.pid] = 0;
       }
@@ -40,7 +43,7 @@ if(cluster.isMaster) {
       console.log(`The worker #${oldPID} has disconnected`);
       console.log(`app ${app.name} restarted attempts: `,
         workerStorage[`${app.name}`][oldPID]);
-      if (workerStorage[`${app.name}`][oldPID] <= app.retry) {
+      if (workerStorage[`${app.name}`][oldPID] < app.retry) {
         console.log('----------------')
         console.log('We can retry to restart worker again');
         console.log('worker %d died (%s). restarting...',
@@ -54,7 +57,7 @@ if(cluster.isMaster) {
         const attempts = workerStorage[`${app.name}`][oldPID];
 
         // save attempts number with newly created worker;
-        workerStorage[`${app.name}`][newPID] = attempts;
+        workerStorage[`${app.name}`][newPID] = attempts + 1;
 
       }
       else {
