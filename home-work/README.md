@@ -38,3 +38,10 @@ Based on http server create your own 'express' with:
     - Routing
     - Body parser (body after parcew add to request object as field)
     - Send json
+
+# Homework 9
+Create your own pm2.
+ - Run processes from the file (config settings)
+ - Create instances of the running file (config settings)
+ - Set max restarts attempt (config)
+ - Add watcher for changes in the files.
