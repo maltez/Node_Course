@@ -1,0 +1,7 @@
+{
+  "executable":"test.js",
+  "instanceNum": 3,
+  "maxAttempts": 3,
+  "allowParentStdout": false,
+  "watcher": true
+}
