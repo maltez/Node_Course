@@ -1,0 +1,21 @@
+version: '2'
+
+services: 
+  node:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports: 
+      - "127.0.0.1:3000:3000"
+    networks: 
+      - nodeapp-network
+  
+  mongodb:
+    image: mongo
+    networks: 
+      - nodeapp-network
+
+
+networks: 
+  nodeapp-network:
+    driver: bridge
