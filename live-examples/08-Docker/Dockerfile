@@ -4,9 +4,9 @@ COPY . /var/www
 
 WORKDIR /var/www
 
-VOLUME [ "/var/www", "/var/www/node_modules" ]
+#VOLUME [ "/var/www", "/var/www/node_modules" ]
 
-RUN npm install
+RUN npm install --no-package-lock
 
 EXPOSE 3000
 
