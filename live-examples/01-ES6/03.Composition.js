@@ -1,5 +1,5 @@
-function sayThms(x){
-    return { x };
+function sayThms(x, y){
+    return { x, y };// {x: 12}
 }
 
 console.log(sayThms('Hey'));
@@ -18,3 +18,9 @@ const b = {
 
 console.log(b.comp12);
 console.log(b[`comp${i}`]);
+
+const a = {
+    1: 12,
+    2: 14,
+    true: 3
+}

@@ -3,4 +3,9 @@ function sayHello(){
     return 'Hello';
 }
 
-console.log(`${sayHello()}. My name is: ${name}. I have ${1 + 2} daughters`);
+const obj = {
+    name : 'alice',
+    greeting : 'Hi'
+}
+
+console.log(`${sayHello()}. My name is: ${name}. I have ${1 + 2} daughters. ${obj[name]} say ${obj.greeting}`);
