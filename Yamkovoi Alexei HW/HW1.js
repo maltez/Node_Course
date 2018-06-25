@@ -1,27 +1,16 @@
-const User = ( function() {
-    const nickName = Symbol()
+const _nickName = Symbol('nickName')
 
-    class User {
-        constructor(firstName, lastName, nick){
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this[nickName] = nick;
-        }
-
-        set nick(value){
-            this[nickName] = value;
-        }
-        get nick(){
-            return this[nickName];
-
-        }
+class Countdown {
+    constructor(firstName, lastName, nickName){
+        this.firstName = firstName
+        this.lastName = lastName
+        this[_nickName] = nickName
     }
-    return User;
-})()
 
-const alex = new User('Alexei', 'Yamkovoi', 'eX')
+}
 
+let user = new Countdown('Alexei', 'Yamkovoi', 'eX')
 
-console.log(alex)   //User { firstName: 'Yamkovoi', lastName: 'Alexei', [Symbol()]: 'eX' }
-console.log(alex.nickName)//undefined
-console.log(alex.nick)//eX
+console.log(Object.keys(c))                                  //[ 'firstName', 'lastName' ]
+console.log(Object.getOwnPropertySymbols(c))                //[ Symbol(nickName) ]
+console.log(c.firstName, c.lastName, c[_nickName])          //Alexei Yamkovoi eX  
