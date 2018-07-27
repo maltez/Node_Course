@@ -2,23 +2,47 @@ const { EventEmitter } = require('events');
 
 const event = new EventEmitter();
 
-const logger = () => {
-    console.log(`Logged`);
-};
+event.on('TestRun', (name) => {
+    console.log(`Test with name: ${name} is running`);
+});
 
-const notifier = () => {
-    console.log(`Notified`);
-};
+event.on('TestPassed', (name, longevity) => {
+    console.log(`Test ${name} passed after ${longevity} ms`);
+})
 
-const audit = () => {
-    console.log(`Audited`);
-};
+console.log(event.listenerCount('TestRun'));
+event.setMaxListeners(11)
 
-event.on('test', logger);
-event.on('test', notifier);
-event.on('test', audit);
+for(let i = 0; i < 9; i++) {
+    event.on('TestRun', () => {
+        console.log('---------------------');
+    });
+}
 
-event.emit('test');
+event.removeAllListeners('x');
 
-event.removeListener('test', audit);
-event.emit('test');
+setTimeout(()=> {
+    const listeners = event.listeners('TestPassed');
+    event.removeListener('TestPassed', listeners[0])
+    event.on('TestRun', () => {
+        console.log('---------------------');
+    });
+}, 500)
+
+event.emit('TestRun', 'Super test');
+
+
+setTimeout(() => {
+    event.emit('TestPassed', 'test new', 200)
+    event.emit('TestRun', 'Test1');
+    event.emit('TestRun', 'Test2');
+    event.emit('TestRun', 'Test3');
+    event.emit('TestRun', 'Test4');
+    event.emit('TestRun', 'Test5');
+}, 2000)
+
+// event.emit('TestRun', 'Test1');
+// event.emit('TestRun', 'Test2');
+// event.emit('TestRun', 'Test3');
+// event.emit('TestRun', 'Test4');
+// event.emit('TestRun', 'Test5');

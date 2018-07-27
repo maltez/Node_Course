@@ -1,16 +1,28 @@
 const { EventEmitter } = require('events');
 
-class NickEventEmitter extends EventEmitter {
+class MyOwnEvent extends EventEmitter {
     constructor(name) {
         super();
         this.name = name;
-        this.on(name, () => {});
     }
 
-    get maxListenersCount () {
-        return this.getMaxListeners(this.name);
+    on(eventName, fn) {
+        console.log(`Add listener with name ${this.name}`);
+        super.on(eventName, fn)
+    }
+    removeListener(...args) {
+        console.log(`Remove listener with name ${this.name}`);
+        super.removeListener(...args);
     }
 }
 
-const nickEvent = new NickEventEmitter('start');
-console.log(nickEvent.maxListenersCount);
+const myEvent = new MyOwnEvent('Nick event');
+myEvent.on('Nick run', () => {
+    console.log('Nick running!!!!!');
+})
+
+
+myEvent.
+myEvent.emit('Nick run');
+myEvent.removeListener('Nick run', myEvent.listeners('Nick run')[0]);
+myEvent.emit('Nick run');
