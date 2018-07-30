@@ -1,7 +1,10 @@
 const { createServer } = require('http');
+const app = require('../server/app');
 
 const PORT = process.env.PORT ? process.env.PORT : 3000; 
 const HOST = process.env.HOST ? process.env.HOST: 'localhost';
+
+const server = createServer(app);
 
 process.on('uncaughtException', (err) => {
     console.log('Something goes wrong');
@@ -13,17 +16,6 @@ process.on('exit', () => {
     console.log('Bye!!!');
 });
 
-const server = createServer((req, res) => {
-    req.on('data', (chunk) => {
-        console.log('Hello')
-    });
-
-    req.on('end', () => {
-        res.write('Good bye my Node.js');
-        res.end();
-    })
-});
-
 server.listen(PORT, HOST, () => {
-    console.log(`Server listen on ${HOST1}:${PORT}`);
+    console.log(`Server listen on ${HOST}:${PORT}`);
 });
