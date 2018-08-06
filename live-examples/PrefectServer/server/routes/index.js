@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const { factorial } = require('../services/factorial.service');
 const { logger } = require('../middleware/logging.service');
 
 const route = Router();
@@ -8,6 +9,13 @@ route.get('/', (req, res) => {
     res.json({
         status: 200,
         message: 'get OK',
+    });
+});
+
+route.get('/:num', (req, res) => {
+    res.json({
+        status: 200,
+        message: factorial(req.params.num),
     });
 });
 

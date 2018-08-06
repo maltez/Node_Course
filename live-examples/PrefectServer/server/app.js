@@ -1,24 +1,34 @@
 const path = require('path');
 const express = require('express');
+const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
 const index = require('./routes/index');
+const users = require('./routes/users');
 
 const app = express();
+app.use(bodyParser.json());
 
 app.engine('handlebars', exphbs({
     defaultLayout: 'main.handlebars',
     layoutsDir: path.resolve(__dirname, 'views/layouts'),
 }));
 
+app.use('/', index);
+app.use('/users', users);
+
 app.set('views', path.resolve(__dirname, 'views'));
 app.set('view engine', 'handlebars');
 
 
-app.use('/public', express.static(path.join(__dirname, 'public')));
-app.use('/', index);
+app.use('/static', express.static(path.join(__dirname, 'public')));
 
-app.get('/hbs', (req, res) => {
-    res.render('home');
+
+app.get('/hbs/:name', (req, res) => {
+    res.render('home', { name: req.params.name });
+});
+
+app.get('/hbs/', (req, res) => {
+    res.render('extraLarge');
 });
 
 app.use((req, res, next) => {
