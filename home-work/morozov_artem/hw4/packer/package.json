@@ -1,0 +1,17 @@
+{
+  "name": "packer",
+  "version": "1.0.0",
+  "description": "packer",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "pack"
+  ],
+  "author": "Artem Morozov",
+  "license": "MIT",
+  "dependencies": {
+    "tar-fs": "^1.16.3"
+  }
+}
