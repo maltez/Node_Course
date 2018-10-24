@@ -46,3 +46,15 @@ Create your own pm2.
  - Create instances of the running file (config settings)
  - Set max restarts attempt (config)
  - Add watcher for changes in the files.
+
+ # Final task
+ - Create web server
+ - It contains Connection to MySQL server
+ - It contains users permission sets in MySQL DB
+ - Users info allows on the REST API
+ - In the MongoDB contains info about users pets
+ - Server can work in as proxy server when user go to /google rote
+ - Via google route server should proxy all trafic on google
+ - Statistic for google requests contains on mongo db
+ - Server contains statistic about requests in /stat route
+ - User can see request count in the server render page
