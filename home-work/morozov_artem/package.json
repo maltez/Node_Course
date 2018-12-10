@@ -1,0 +1,14 @@
+{
+  "name": "morozov_artem",
+  "version": "1.0.0",
+  "description": "mypack",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js"
+  },
+  "keywords": [
+    "MIT"
+  ],
+  "author": "Morozov Artenm",
+  "license": "MIT"
+}
